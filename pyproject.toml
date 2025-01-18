@@ -1,0 +1,23 @@
+[project]
+name = "food-decision-maker"
+version = "0.1.0"
+description = "Decision maker service for food delivery chat bot"
+authors = [
+    {name = "FranChesK0"}
+]
+license = {text = "Apache-2.0"}
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+]
+packages = [
+  {"include" = "src", "from" = "."}
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+packages = [
+  {"include" = "src", "from" = "."}
+]
