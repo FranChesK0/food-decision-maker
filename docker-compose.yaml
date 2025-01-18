@@ -1,0 +1,9 @@
+services:
+  app:
+    build: .
+    container_name: food-decision-maker
+    restart: unless-stopped
+    ports:
+      - 8001:8001
+    volumes:
+      - .:/app
