@@ -1,0 +1,82 @@
+repos:
+  # Basic hooks
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: check-merge-conflict
+        name: Check merge conflict
+      - id: trailing-whitespace
+        name: Fix trailing whitespace
+      - id: end-of-file-fixer
+        name: Fix end of files
+      - id: detect-private-key
+        name: Detect private keys
+      - id: check-json
+        name: Check JSON
+      - id: check-toml
+        name: Check TOML
+      - id: check-yaml
+        name: Check YAML
+
+  # Poetry hooks
+  - repo: https://github.com/python-poetry/poetry
+    rev: 2.0.1
+    hooks:
+      - id: poetry-check
+        name: Check poetry configuration
+      - id: poetry-lock
+        name: Ensure 'poetry.lock' file is up-to-date
+      - id: poetry-install
+        name: Ensure all locked packages installed
+
+  # Python hooks
+  - repo: https://github.com/pre-commit/pygrep-hooks
+    rev: v1.10.0
+    hooks:
+      - id: python-check-blanket-noqa
+        name: Check blanket 'noqa'
+      - id: python-check-blanket-type-ignore
+        name: "Check blanket 'type: ignore'"
+
+  - repo: local
+    hooks:
+      - id: isort
+        name: Isort
+        entry: isort .
+        language: system
+        types: [python]
+        pass_filenames: false
+        stages: [pre-commit]
+
+      - id: black
+        name: Black
+        entry: black .
+        language: system
+        types: [python]
+        pass_filenames: false
+        stages: [pre-commit]
+
+      - id: flake8
+        name: Flake8
+        entry: flake8 .
+        language: system
+        types: [python]
+        pass_filenames: false
+        stages: [pre-commit]
+
+      - id: mypy
+        name: MyPy
+        entry: mypy .
+        language: system
+        types: [python]
+        pass_filenames: false
+        stages: [pre-commit]
+
+      # - id: pytest
+      #   name: PyTest
+      #   entry: pytest
+      #   language: system
+      #   types: [python]
+      #   pass_filenames: false
+      #   always_run: true
+      #   stages: [pre-merge-commit, pre-push]
