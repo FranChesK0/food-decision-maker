@@ -62,11 +62,13 @@ class RecommendedSet(BaseModel):
 
     Args:
         restaurant_id (int): The id of the restaurant.
+        restaurant_title (str): The title of the restaurant.
         items (list[Item]): The items of the recommended set.
         total_price (float): The total price of the recommended set.
     """
 
     restaurant_id: int
+    restaurant_title: str
     items: list[Item]
     total_price: float
 

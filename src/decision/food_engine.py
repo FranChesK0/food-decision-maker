@@ -77,9 +77,14 @@ class FoodOrderingEngine(KnowledgeEngine):  # type: ignore[no-any-unimported]
         if not recommendations:
             return None
 
+        async with FoodHTTPClient() as client:
+            restaurants = await client.get_restaurants()
+        restaurant_title = [r.title for r in restaurants if r.id == restaurant_id][0]
+
         recommended_set = recommendations[0]
         return RecommendedSet(
             restaurant_id=restaurant_id,
+            restaurant_title=restaurant_title,
             items=list(recommended_set),
             total_price=sum(item.price for item in recommended_set),
         )

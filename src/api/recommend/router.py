@@ -12,6 +12,7 @@ router = APIRouter(prefix="/recommend", tags=["Decision Making"])
 @router.post("", summary="Recommend menu")
 async def recommend_menu(request: RecommendRequest) -> RecommendedSet | RecommendResponse:
     engine = FoodOrderingEngine()
+    engine.reset()
     restaurants = await engine.choose_restaurants(request.cuisine)
 
     recommendations: list[RecommendedSet] = []
