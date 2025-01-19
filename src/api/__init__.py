@@ -1,6 +1,8 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
+from . import recommend
+
 
 def setup_app(app: FastAPI) -> None:
     """
@@ -16,6 +18,7 @@ def setup_app(app: FastAPI) -> None:
         allow_methods=["*"],
         allow_headers=["*"],
     )
+    app.include_router(recommend.router)
 
 
 __all__ = ["setup_app"]
