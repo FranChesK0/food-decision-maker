@@ -1,27 +1,10 @@
 from loguru import logger
 from experta import MATCH, Fact, Rule, KnowledgeEngine  # type: ignore[import-untyped]
-from pydantic import BaseModel, ConfigDict
 
-from http_client import Item, Menu, MenuItem, Restaurant, FoodHTTPClient
+from schemas import Item, Menu, MenuItem, Restaurant, RecommendedSet
+from http_client import FoodHTTPClient
 
 from .utils import check_match, filter_menu_by_buget
-
-
-class RecommendedSet(BaseModel):
-    """
-    A recommended set of items.
-
-    Args:
-        restaurant_id (int): The id of the restaurant.
-        items (list[Item]): The items of the recommended set.
-        total_price (float): The total price of the recommended set.
-    """
-
-    restaurant_id: int
-    items: list[Item]
-    total_price: float
-
-    model_config = ConfigDict(from_attributes=True)
 
 
 class FoodOrderingEngine(KnowledgeEngine):  # type: ignore[no-any-unimported]

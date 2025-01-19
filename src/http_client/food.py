@@ -1,97 +1,10 @@
 from loguru import logger
-from pydantic import BaseModel, ConfigDict
 from async_lru import alru_cache
 
 from core import settings
+from schemas import Menu, Category, Restaurant
 
 from .base import HTTPClient
-
-
-class Restaurant(BaseModel):
-    """
-    Restaurant schema.
-
-    Args:
-        id (int): The id of the restaurant.
-        title (str): The title of the restaurant.
-        address (str): The address of the restaurant.
-        cuisines (list[str]): The cuisines of the restaurant.
-    """
-
-    id: int
-    title: str
-    address: str
-    cuisines: list[str]
-
-    model_config = ConfigDict(from_attributes=True)
-
-
-class Category(BaseModel):
-    """
-    Category schema.
-
-    Args:
-        id (int): The id of the category.
-        name (str): The name of the category.
-    """
-
-    id: int
-    name: str
-
-    model_config = ConfigDict(from_attributes=True)
-
-
-class Item(BaseModel):
-    """
-    Item schema.
-
-    Args:
-        id (int): The id of the item.
-        restaurant_id (int): The id of the restaurant.
-        category_id (int): The id of the category.
-        name (str): The name of the item.
-        price (float): The price of the item.
-        description (str): The description of the item.
-    """
-
-    id: int
-    restaurant_id: int
-    category_id: int
-    name: str
-    price: float
-    description: str
-
-    model_config = ConfigDict(from_attributes=True)
-
-
-class MenuItem(BaseModel):
-    """
-    MenuItem schema.
-
-    Args:
-        category (Category): The category of the menu item.
-        items (list[Item]): The items of the menu item.
-    """
-
-    category: Category
-    items: list[Item]
-
-    model_config = ConfigDict(from_attributes=True)
-
-
-class Menu(BaseModel):
-    """
-    Menu schema.
-
-    Args:
-        restaurant_id (int): The id of the restaurant.
-        items (list[MenuItem]): The items of the menu.
-    """
-
-    restaurant_id: int
-    items: list[MenuItem]
-
-    model_config = ConfigDict(from_attributes=True)
 
 
 class FoodHTTPClient(HTTPClient):

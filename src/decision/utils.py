@@ -2,7 +2,7 @@ import itertools
 
 from rapidfuzz import process
 
-from http_client import Item, Menu
+from schemas import Item, Menu
 
 MEAL_REQUIREMENTS: dict[str, list[str]] = {
     "main": [
