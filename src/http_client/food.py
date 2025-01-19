@@ -2,6 +2,8 @@ from loguru import logger
 from pydantic import BaseModel, ConfigDict
 from async_lru import alru_cache
 
+from core import settings
+
 from .base import HTTPClient
 
 
@@ -107,8 +109,8 @@ class FoodHTTPClient(HTTPClient):
         get_menu(restaurant_id: int) -> Menu: Get the menu of a restaurant.
     """
 
-    def __init__(self, base_url: str) -> None:
-        super().__init__(base_url=base_url)
+    def __init__(self) -> None:
+        super().__init__(base_url=settings.FOOD_DELIVERY_BASE_URL)
 
     @logger.catch
     @alru_cache
